@@ -53,7 +53,7 @@ function Chat({ socket, username, room }) {
                 </div>
                 );
             })}
-            </ScrollToBottom>
+        </ScrollToBottom>
       </div>
       <div className="chat-footer">
         <input
