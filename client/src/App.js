@@ -1,45 +1,53 @@
-import './App.css';
-import io from 'socket.io-client'
-import { useState } from "react";
-import Chat from "./Chat";
-
-const socket = io.connect("http://localhost:3001");
-
-function App() {
-
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("chat-room");
-  const [showChat, setShowChat] = useState(false);
-
-  const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
-  };
-
-  return (
-    <div className="App">
-      {!showChat ? (
-        <div className="joinChatContainer">
-          <h3>Join A Chat</h3>
-          <input
-            type="text"
-            placeholder="John..."
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-            onKeyPress={(event) => {
-              event.key === "Enter" && joinRoom();
-            }}
-          />
-          <button onClick={joinRoom}>Join A Room</button>
-        </div>
-      ) : (
-        <Chat socket={socket} username={username} room={room} />
-      )}
-    </div>
-  );
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./App.css");
+const socket_io_client_1 = __importDefault(require("socket.io-client"));
+const react_1 = __importStar(require("react"));
+const Chat_1 = __importDefault(require("./Chat"));
+const socket = (0, socket_io_client_1.default)('http://localhost:3001');
+function App() {
+    const [username, setUsername] = (0, react_1.useState)('');
+    const [room, setRoom] = (0, react_1.useState)('chat-room');
+    const [showChat, setShowChat] = (0, react_1.useState)(false);
+    const joinRoom = () => {
+        if (username !== '' && room !== '') {
+            socket.emit('join_room', room);
+            setShowChat(true);
+        }
+    };
+    return (react_1.default.createElement("div", { className: "App" }, !showChat ? (react_1.default.createElement("div", { className: "joinChatContainer" },
+        react_1.default.createElement("h3", null, "Join A Chat"),
+        react_1.default.createElement("input", { type: "text", placeholder: "John...", onChange: (event) => {
+                setUsername(event.target.value);
+            }, onKeyPress: (event) => {
+                event.key === 'Enter' && joinRoom();
+            } }),
+        react_1.default.createElement("button", { onClick: joinRoom }, "Join A Room"))) : (react_1.default.createElement(Chat_1.default, { socket: socket, username: username, room: room }))));
 }
-
-export default App;
+exports.default = App;
